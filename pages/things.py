@@ -11,5 +11,7 @@ if st.button('yeah this feels about right'):
         st.write("better 'tude better time")
     elif rating == 3:
         st.write("it's a great day to have a great day")
+    elif rating == 4:
+        st.write("crazy, days usually don't get better than this")
     elif rating == 5:
         st.write("great days")
