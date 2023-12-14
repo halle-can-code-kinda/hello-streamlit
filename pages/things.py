@@ -1,8 +1,11 @@
 import streamlit as st
 
-st.header('st.button')
+st.header('encouraging messages')
 
-if st.button('Say hello'):
-     st.write('Why hello there')
-else:
-     st.write('Goodbye')
+rating = st.slider("how are you feeling today?", 1, 5, 1)
+
+if st.button('yeah this feels about right'):
+    if rating == 3:
+        st.write("it's a great day to have a great day")
+
+        
