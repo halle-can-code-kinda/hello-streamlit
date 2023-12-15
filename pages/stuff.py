@@ -7,16 +7,19 @@ def stand_form():
     
     try:
         if obj_edf.iloc[0,0] == "max":
-            standard_form[0,0] = "min"
+            standard_form.iloc[0,0] = "min"
             standard_form.iloc[0,1] = -1*obj_edf.iloc[0,1]
+        elif obj_edf.iloc[0,0] != "min":
+            raise Exception
         
         st.write(standard_form)
     except:
-        st.write("input error")
-        st.write("objective box should have min or max")
-        st.write("all variable cells and RHS should have numbers")
-        st.write("inequality cell should have <=, >=, or ==")
-
+       st.markdown(
+           "**input error**   "
+           "objective value should be min or max  "
+           "variable cells should be numbers  "
+           "inequality cells should be >=, <=, or =="
+       )
 
 st.header("LP Simplex")
 
