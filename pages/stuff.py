@@ -15,7 +15,7 @@ def stand_form():
         st.write(standard_form)
     except:
        st.markdown(
-           '''**input error*  
+           '''***input error***  
            objective value should be min or max  
            inequality cells should be >=, <=, or =='''
        )
