@@ -15,10 +15,9 @@ def stand_form():
         st.write(standard_form)
     except:
        st.markdown(
-           "**input error**"  
-           "objective value should be min or max"  
-           "variable cells should be numbers"  
-           "inequality cells should be >=, <=, or =="
+           '''**input error*  
+           objective value should be min or max  
+           inequality cells should be >=, <=, or =='''
        )
 
 st.header("LP Simplex")
