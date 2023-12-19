@@ -66,7 +66,6 @@ constraints = pd.DataFrame(
    ]
 )
 cons_edf = st.data_editor(constraints)
-st.write("*all decision variables must be nonnegative")
 
 #standard form
 SF_button = st.button("Solve via Simplex Method")
