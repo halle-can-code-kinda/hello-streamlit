@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 
+def first_tableau():
+    st.write("First")
+
 def standard_form():   
     try:
         #objective function 
@@ -37,12 +40,15 @@ def standard_form():
         #display tableaus
         st.write(sf_obj)        
         st.write(sf_cons)
+        if st.button("first tabluea"):
+            first_tableau()
     except:
        st.markdown(
            '''**input error**  
            objective value should be min or max  
            inequality cells should be >=, <=, or ==  
            all other cells should be numbers''')
+
 
 #initial example
 st.header("LP Simplex")
@@ -65,9 +71,6 @@ st.write("*all decision variables must be nonnegative")
 SF_button = st.button("Find LP in Standard Form")
 if SF_button:
     standard_form()
-    first = st.button("first tableau")
-    if first:
-        st.write("first")
 
 
 
