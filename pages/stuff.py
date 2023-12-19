@@ -32,11 +32,11 @@ def standard_form():
             elif sf_cons.loc[i,"inequality"] != "==":
                 raise Exception
             
-            c_index = c_index+1          
-        #display tableaus
-        st.write(sf_obj)
-        st.write(sf_cons)    
+            c_index = c_index+1
+        st.write(sf_obj, sf_cons)
+        initial_tableau(sf_obj, sf_cons)                 
 
+    
     except:
        st.markdown(
            '''**input error**  
@@ -44,9 +44,12 @@ def standard_form():
            inequality cells should be >=, <=, or ==  
            all other cells should be numbers''')
     
+def initial_tableau(obj, cons):
+    st.subheader("Initial Tableau")
+    new_row = pd.DataFrame({"x1": obj.iloc[0,1],"s1": 0,"s2":0,"s3":0, "inequality": "==", "RHS": "N/A"}, index=[0])
+    tableau = pd.concat([new_row,cons.loc[:]]).reset_index(drop=True)
+    st.write(tableau)
 
-def initial_tableau():
-    st.write("stuff")
 
 #initial example
 st.header("LP Simplex")
@@ -69,7 +72,3 @@ st.write("*all decision variables must be nonnegative")
 SF_button = st.button("Solve via Simplex Method")
 if SF_button:
     standard_form()
-    initial_tableau()
-
-
-
