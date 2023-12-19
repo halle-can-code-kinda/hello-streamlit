@@ -34,7 +34,8 @@ def standard_form():
             
             c_index = c_index+1          
         #display tableaus
-        return sf_obj, sf_cons       
+        st.write(sf_obj)
+        st.write(sf_cons)    
 
     except:
        st.markdown(
@@ -45,9 +46,7 @@ def standard_form():
     
 
 def initial_tableau():
-    st.subheader("Initial Tableau")
-    tableau = []
-    tableau.append[sf_obj.iloc[0,1],0,0,0]
+    st.write("stuff")
 
 #initial example
 st.header("LP Simplex")
