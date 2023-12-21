@@ -23,6 +23,7 @@ if name:
         api_url = 'https://api.api-ninjas.com/v1/cocktail?name={}'.format(name)
         response = requests.get(api_url, headers={'X-Api-Key': 'VVWkroJxCJDoV5Y85g8zGQ==WO58i3UJbCn1IxvY'})
         cocktail = pd.DataFrame(eval(response.text))
-        st.write(cocktail)
+        cocktail = cocktail[['name', 'ingredients','instructions']]
+        st.dataframe(cocktail, hide_index= True)
     except:
         st.markdown("**Error**: no cocktail found by this name", response.status_code, response.text)
