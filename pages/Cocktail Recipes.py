@@ -10,7 +10,7 @@ ingredient = st.text_input("by ingredients ('blackberry, bourbon')")
 
 if ingredient:
     try:
-        api_url = 'https://api.api-ninjas.com/v1/cocktail?ingredients={}'.format(ingredient)
+        api_url = 'https://api.api-ninjas.com/v1/cocktail?ingredients={}&limit={1}'.format(ingredient)
         response = requests.get(api_url, headers={'X-Api-Key': 'VVWkroJxCJDoV5Y85g8zGQ==WO58i3UJbCn1IxvY'})
         cocktail = pd.DataFrame(eval(response.text))
         cocktail = cocktail[['name', 'ingredients','instructions']]
