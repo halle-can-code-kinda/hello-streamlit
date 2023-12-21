@@ -2,7 +2,8 @@ import requests
 import streamlit as st
 import pandas as pd
 
-st.header("Search for cocktails by name or ingredients")
+st.header("Cocktail Search")
+          
 ingredient = st.text_input("by ingredients ('blackberry, bourbon')")
 
 
@@ -15,7 +16,7 @@ if ingredient:
         cocktail = pd.DataFrame(eval(response.text))
         st.write(cocktail[['name', 'ingredients','instructions']])
     else:
-        st.write("Error:", response.status_code, response.text)
+        st.write("Error: no cocktail recipe found with all those ingredients", response.status_code, response.text)
 
 if name:
     api_url = 'https://api.api-ninjas.com/v1/cocktail?name={}'.format(name)
@@ -24,4 +25,4 @@ if name:
         cocktail = pd.DataFrame(eval(response.text))
         st.write(cocktail)
     else:
-        st.write("Error:", response.status_code, response.text)
+        st.write("Error: no cocktail found by this name", response.status_code, response.text)
