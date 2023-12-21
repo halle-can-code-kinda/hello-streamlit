@@ -6,9 +6,9 @@ import random
 
 category = st.selectbox(
     'Question Category',
-    ('random','language', 'sciencenature', 'general', 'fooddrink', 'peopleplaces', 'geography','historyholidays','entertainment','toysgames','music','mathematics','religionmythology','sportsleisure'))
+    ('surprise me!','language', 'sciencenature', 'general', 'fooddrink', 'peopleplaces', 'geography','historyholidays','entertainment','toysgames','music','mathematics','religionmythology','sportsleisure'))
 
-if category == "random":
+if category == "surprise me!":
     category = random.choice(['language', 'sciencenature', 'general', 'fooddrink', 'peopleplaces', 'geography','historyholidays','entertainment','toysgames','music','mathematics','religionmythology','sportsleisure'])
 
 if st.button("Generate Trivia Question"):
