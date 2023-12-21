@@ -10,5 +10,8 @@ if response.status_code == requests.codes.ok:
     st.write(response.text)
     history = pd.DataFrame(eval(response.text))
     st.write(history)
+    st.subheader("Today in History")
+    for i in range(len(history)):
+        st.markdown(history.iloc[i,3])
 else:
     st.write("Error:", response.status_code, response.text)
