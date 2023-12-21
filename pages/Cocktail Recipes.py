@@ -12,10 +12,10 @@ name = st.text_input("by cocktail name")
 if ingredient:
     api_url = 'https://api.api-ninjas.com/v1/cocktail?ingredients={}'.format(ingredient)
     response = requests.get(api_url, headers={'X-Api-Key': 'VVWkroJxCJDoV5Y85g8zGQ==WO58i3UJbCn1IxvY'})
-    if response.status_code == requests.codes.ok:
+    try: 
         cocktail = pd.DataFrame(eval(response.text))
         st.write(cocktail[['name', 'ingredients','instructions']])
-    else:
+    except:
         st.write("Error: no cocktail recipe found with all those ingredients", response.status_code, response.text)
 
 if name:
