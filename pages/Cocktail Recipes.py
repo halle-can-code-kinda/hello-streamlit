@@ -4,8 +4,9 @@ import pandas as pd
 
 st.header("Cocktail Search")
           
-ingredient = st.text_input("by ingredients ('blackberry, bourbon')")
 name = st.text_input("by cocktail name")
+ingredient = st.text_input("by ingredients ('blackberry, bourbon')")
+
 
 if ingredient:
     try:
