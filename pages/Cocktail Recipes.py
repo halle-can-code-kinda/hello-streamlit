@@ -15,7 +15,7 @@ if ingredient:
         cocktail = cocktail[['name', 'ingredients','instructions']]
         st.dataframe(cocktail, hide_index= True)
     except:
-        st.write("Error: no cocktail recipe found with all those ingredients")
+        st.markdown("**Error**: no cocktail recipe found with all those ingredients")
 
 if name:
     try:
@@ -24,4 +24,4 @@ if name:
         cocktail = pd.DataFrame(eval(response.text))
         st.write(cocktail)
     except:
-        st.write("Error: no cocktail found by this name", response.status_code, response.text)
+        st.markdown("**Error**: no cocktail found by this name", response.status_code, response.text)
