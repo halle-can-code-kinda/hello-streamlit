@@ -242,7 +242,6 @@ def run():
         st.write(insult)
 
 
-    st.sidebar.success("Select a demo above.")
 
 
 
