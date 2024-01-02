@@ -14,6 +14,7 @@ if ingredient:
         response = requests.get(api_url, headers={'X-Api-Key': 'VVWkroJxCJDoV5Y85g8zGQ==WO58i3UJbCn1IxvY'})
         cocktail = pd.DataFrame(eval(response.text))
         cocktail = cocktail[['name', 'ingredients','instructions']]
+        st.write(cocktail)
     except:
         st.markdown("**Error**: no cocktail recipe found with all those ingredients")
 
