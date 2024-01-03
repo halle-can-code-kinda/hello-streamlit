@@ -10,6 +10,9 @@ def render_svg(svg):
     b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
     html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
     st.write(html, unsafe_allow_html=True)
+def standard():
+    svg = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
+    render_svg(chess.svg.board(svg))
 
 def fischer_random():
     correct = 0
@@ -62,7 +65,6 @@ def fischer_random():
     for i in range (8):
         svg=svg+fischer_board[i]
     svg = chess.Board(svg)
-    #svg = chess.Board("rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
     render_svg(chess.svg.board(svg))
    
 
@@ -70,5 +72,7 @@ st.header("Chess Board Setup Generator")
 variant = st.selectbox("Chess Variant", ("Standard", "Fischer Random"))
 button = st.button("Generate Board")
 if button:
-    if variant == "Fischer Random":
+    if variant == "Standard":
+        standard()
+    elif variant == "Fischer Random":
         fischer_random()
