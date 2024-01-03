@@ -6,8 +6,4 @@ streamlit
 #added stuff
 chess
 stchess
-streamlit_scrollable_textbox
-st_bridge
-modules.chess
-modules.utility
-modules.states 
+matplotlib
