@@ -62,7 +62,6 @@ def fischer_random():
     for i in range (8):
         svg=svg+fischer_board[i]
     svg = chess.Board(svg)
-    st.write(svg)
     #svg = chess.Board("rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
     render_svg(chess.svg.board(svg))
    
