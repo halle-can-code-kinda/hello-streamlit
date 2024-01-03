@@ -46,9 +46,3 @@ if button:
             correct = 1
 
     st.write(fischer_board)
-
-
-
-
-
-
