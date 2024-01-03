@@ -1,6 +1,9 @@
 import streamlit as st
 import random
 import pandas as pd 
+import chess
+import chess.svg as svg
+import stchess
 
 st.header("Fischer Random Board Generator")
 st.write("Learn more about Fischer Random [here](https://www.chess.com/terms/chess960)")
@@ -46,3 +49,5 @@ if button:
             correct = 1
 
     st.write(fischer_board)
+
+st.board
