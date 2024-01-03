@@ -7,22 +7,13 @@ import chess.svg
 import base64
 import os
 
-files = os.listdir('games')
-file = st.selectbox('Select game',files)
-pgn = open('games/'+file)
-
-game = chess.pgn.read_game(pgn)
-st.title(game.headers["White"]+" vs "+game.headers["Black"])
-# st.write(game.headers["Link"])
 
 # scorebox = st.checkbox("Display Score",False)
 
-board = game.board()
-moves = [move for move in game.mainline_moves()]
-mv = st.slider("Move",0,len(moves),len(moves))
 
-for move in moves[0:mv]:
-    board.push(move)
+#svg = chess.Board("r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR")
+svg = chess.Board("rnbkqbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
+#svg = chess.Board("r1bkqb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4")
 
 def render_svg(svg):
     """Renders the given svg string."""
@@ -30,7 +21,7 @@ def render_svg(svg):
     html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
     st.write(html, unsafe_allow_html=True)
 
-render_svg(chess.svg.board(board))
+render_svg(chess.svg.board(svg))
 
 # if scorebox:
 #     # Send request if scorebox is ticked
@@ -42,6 +33,7 @@ render_svg(chess.svg.board(board))
 #         data = res['data']
 #         score.append(data)
 #         boardScore.push(move)
+
 
 
 #     fig, ax = plt.subplots()
