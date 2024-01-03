@@ -2,7 +2,6 @@ import streamlit as st
 import random
 import pandas as pd 
 
-
 st.header("Fischer Random Board Generator")
 st.write("Learn more about Fischer Random [here](https://www.chess.com/terms/chess960)")
 
