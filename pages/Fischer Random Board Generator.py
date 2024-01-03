@@ -1,6 +1,7 @@
 import streamlit as st
-import pandas as pd
 import random
+import pandas as pd 
+
 
 st.header("Fischer Random Board Generator")
 st.write("Learn more about Fischer Random [here](https://www.chess.com/terms/chess960)")
@@ -17,8 +18,6 @@ if button:
             fischer_board.append(piece)
             board_setup.remove(piece)
 
-        st.write(fischer_board)
-
         #check if opposite color bishops 
         even_bishop = 0
         odd_bishop = 0 
@@ -29,7 +28,8 @@ if button:
                     even_bishop = 1
                 else:
                     odd_bishop = 1
-        #TO-DO check if king is between rooks
+
+        #check if king is between rooks
         rook_position = []
         king_position = 0
         rook = 0
@@ -42,14 +42,13 @@ if button:
         if rook_position[0] < king_position and rook_position[1] > king_position:
             rook = 1
 
-
-        #TO-DO check if board is valid 
-        st.write("rook", rook)
-        st.write("even bishop", even_bishop)
-        st.write("odd bishop", odd_bishop)
+        #check if board is valid 
         if even_bishop == 1 and odd_bishop == 1 and rook == 1:
             correct = 1
-        st.write(correct)
+
+    st.write(fischer_board)
+
+
 
 
 
