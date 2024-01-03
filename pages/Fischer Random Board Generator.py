@@ -7,7 +7,7 @@ import chess.svg as svg
 import base64
 
 st.header("Fischer Random Board Generator")
-st.write("Learn more about Fischer Random [here](https://www.chess.com/terms/chess960)")
+#st.write("Learn more about Fischer Random [here](https://www.chess.com/terms/chess960)")
 
 button = st.button("Generate Board")
 correct = 0
