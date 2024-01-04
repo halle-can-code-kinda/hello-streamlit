@@ -9,6 +9,7 @@ songs = pd.DataFrame(data)
 st.dataframe(data)
 values = range(0,9)
 year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
-year = st.select_slider("recent", values,label_visibility="collapsed",value =4, format_func=(lambda x:year_labels[x]))
+year = st.select_slider("recent", values,label_visibility="collapsed",value = 4, format_func=(lambda x:year_labels[x]))
 speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
-speed = st.select_slider(" ", values,label_visibility="collapsed",value =4, format_func=(lambda x:speed_labels[x]))
+speed = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:speed_labels[x]))
+mode_labels = ['happy',' ',' ',' ','indifferent',' ',' ',' ','sad']
