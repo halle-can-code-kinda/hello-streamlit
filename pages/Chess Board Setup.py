@@ -1,8 +1,6 @@
 import streamlit as st
 import random
-import pandas as pd 
 import chess
-import chess.svg as svg
 import base64
 
 def create_board(svg):
