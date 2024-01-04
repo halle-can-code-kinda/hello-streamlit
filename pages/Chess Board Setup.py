@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import chess
 import base64
+import chess.svg
 import stockfish as sh
 
 
