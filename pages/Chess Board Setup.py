@@ -3,6 +3,7 @@ import random
 import chess
 import base64
 import chess.svg
+import chess.engine
 import stockfish as sh
 
 
@@ -10,6 +11,12 @@ def create_board(svg):
     b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
     html = r'<img src="data:image/svg+xml;base64,%s"/>' % b64
     st.write(html, unsafe_allow_html=True)
+
+def stockfish_evaluation(board, time_limit = 0.01):
+    engine = chess.engine.SimpleEngine.popen_uci("stockfish_10_x64")
+    result = engine.analyse(board, chess.engine.Limit(time=time_limit))
+    return result['score']
+
 
 def standard():
     svg = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR")
@@ -67,7 +74,7 @@ def fischer_random():
         svg=svg+white_position[i]
     svg = chess.Board(svg)
     create_board(chess.svg.board(svg))
-   
+
 def transcedental():
     correct = 0
     #white position
@@ -156,6 +163,9 @@ def transcedental():
         svg=svg+white_position[i]
     svg = chess.Board(svg)
     create_board(chess.svg.board(svg))
+    result = stockfish_evaluation(svg)
+    st.write(result)
+   
 
 
 
