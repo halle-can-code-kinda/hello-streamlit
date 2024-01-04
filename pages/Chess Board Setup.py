@@ -155,7 +155,7 @@ def transcedental():
         svg=svg+white_position[i]
     svg = chess.Board(svg)
     create_board(chess.svg.board(svg))
-    st.write(sh.get_evaluation())
+
 
 
 st.header("Chess Board Setup")
