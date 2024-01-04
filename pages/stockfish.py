@@ -2,12 +2,9 @@ import chess
 import chess.engine
 import streamlit as st
 
-# Change this if stockfish is somewhere else
-engine = chess.engine.SimpleEngine.popen_uci("/usr/local/bin/stockfish")
+engine = chess.engine.SimpleEngine.popen_uci("/usr/games/stockfish")
 
-# The position represented in FEN
-board = chess.Board("5Q2/5K1k/8/8/8/8/8/8 w - - 0 1")
-
-# Limit our search so it doesn't run forever
+board = chess.Board("r1bqkbnr/p1pp1ppp/1pn5/4p3/2B1P3/5Q2/PPPP1PPP/RNB1K1NR w KQkq - 2 4")
 info = engine.analyse(board, chess.engine.Limit(depth=20))
-st.write(info)
+st.write("Score:", info["score"])
+# Score: PovScore(Mate(+1), WHITE)
