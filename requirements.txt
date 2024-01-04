@@ -6,3 +6,4 @@ streamlit
 #added
 chess
 matplotlib
+stockfish
