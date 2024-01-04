@@ -2,11 +2,12 @@ import chess
 import chess.engine
 import streamlit as st
 
-def stockfish_evaluation(board, time_limit = 0.01):
-    engine = chess.engine.SimpleEngine.popen_uci("stockfish_10_x64")
-    result = engine.analyse(board, chess.engine.Limit(time=time_limit))
-    return result['score']
+# Change this if stockfish is somewhere else
+engine = chess.engine.SimpleEngine.popen_uci("/usr/local/bin/stockfish")
 
-board = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
-result = stockfish_evaluation(board)
-st.write(result)
+# The position represented in FEN
+board = chess.Board("5Q2/5K1k/8/8/8/8/8/8 w - - 0 1")
+
+# Limit our search so it doesn't run forever
+info = engine.analyse(board, chess.engine.Limit(depth=20))
+st.write(info)
