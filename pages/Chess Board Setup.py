@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import chess
 import base64
-import stockfish as sh
+from chess.engine import Cp
 
 def create_board(svg):
     b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
@@ -154,6 +154,8 @@ def transcedental():
         svg=svg+white_position[i]
     svg = chess.Board(svg)
     create_board(chess.svg.board(svg))
+    info = Cp.analyse(svg, chess.engine.Limit(time=0.1))
+    st.write("Score:", info["score"])
 
 st.header("Chess Board Setup")
 variant = st.selectbox("Chess Variant", ("Standard", "Fischer Random", "Transcedental"))
