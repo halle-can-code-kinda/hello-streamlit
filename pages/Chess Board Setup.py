@@ -153,10 +153,11 @@ def transcedental():
         svg=svg+white_position[i]
     svg = chess.Board(svg)
     create_board(chess.svg.board(svg))
-   
+
 st.header("Chess Board Setup")
 variant = st.selectbox("Chess Variant", ("Standard", "Fischer Random", "Transcedental"))
 button = st.button("Generate Board")
+
 if button:
     if variant == "Standard":
         standard()
