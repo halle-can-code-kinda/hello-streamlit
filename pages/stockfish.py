@@ -2,7 +2,7 @@ import streamlit as st
 from stockfish import Stockfish
 
 #https://github.com/zhelyabuzhsky/stockfish/blob/master/stockfish/models.py
-stockfish=Stockfish("stockfish_14_x64_avx2.exe")
+stockfish=Stockfish("/home/vscode/.local/lib/python3.11/site-packages")
 stockfish.set_depth(20)#How deep the AI looks
 stockfish.set_skill_level(20)#Highest rank stockfish
 stockfish.get_parameters()
