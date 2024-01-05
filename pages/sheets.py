@@ -29,12 +29,11 @@ with col1:
         button = st.button("Create Playlist")
     with b2:
         lucky = st.button("I'm feeling lucky")
-if button:
-    if "Live Performances" in exclude:
-        songs = songs.query('live==0')
-    
+
 with col2:
     if button:
-        st.dataframe(data)
+        if "Live Performances" in exclude:
+            songs = songs.query('live==0')
+        st.dataframe(songs)
 
 
