@@ -7,9 +7,11 @@ st.write(" ")
 col1, col2 = st.columns(2)
 url = "https://docs.google.com/spreadsheets/d/1poo8680VUsK15L5N_vh4N1xW4ygzHY3hlh3R2CoNv3g/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
-data = conn.read(spreadsheet=url, usecols=[0, 1])
+cols = []
+for i in range(24):
+    cols.append(i)
+data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
-st.dataframe(data)
 
 with col1:
     values = range(0,9)
