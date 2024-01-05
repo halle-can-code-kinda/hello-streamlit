@@ -8,7 +8,7 @@ col1, col2 = st.columns(2)
 url = "https://docs.google.com/spreadsheets/d/1poo8680VUsK15L5N_vh4N1xW4ygzHY3hlh3R2CoNv3g/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 cols = []
-for i in range(24):
+for i in range(26):
     cols.append(i)
 data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
@@ -23,17 +23,16 @@ with col1:
     mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x]))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
     mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x]))
-    t1,t2 = st.columns(2)
-    with t1: 
-        remix = st.toggle("Include Remixes", True)
-    with t2:
-        live = st.toggle("Include Live Performances", True)
+    exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
     with b1:
         button = st.button("Create Playlist")
     with b2:
         lucky = st.button("I'm feeling lucky")
-
+if button:
+    if "Live Performances" in exclude:
+        songs = songs.query('live==0')
+    
 with col2:
     if button:
         st.dataframe(data)
