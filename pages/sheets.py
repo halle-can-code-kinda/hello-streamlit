@@ -43,9 +43,11 @@ def lucky():
     for i in range(len(data)):
         random_songs.append(data.iloc[i,3])
         st.write(random_songs)
-        st.write(random.sample(random_songs,20))
-
+        playlist = pd.DataFrame(random.sample(random_songs,20))
+        st.dataframe(playlist)
         
+
+
 with col2:
     if button:
         if "Live Performances" in exclude:
