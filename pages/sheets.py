@@ -25,6 +25,7 @@ with col1:
     mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:popularity_labels[x]))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
+    st.write(values)
     with b1:
         button = st.button("Create Playlist")
     with b2:
