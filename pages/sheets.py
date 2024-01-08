@@ -26,13 +26,13 @@ with col1:
     popularity = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x]))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
-    st.write(values)
     with b1:
         button = st.button("Create Playlist")
     with b2:
         lucky = st.button("I'm feeling lucky")
 
 def get_playlist():
+    
     total = abs(year)+abs(speed)+abs(mode)+abs(popularity)
     year_weight = abs(year)/total
     speed_weight = abs(speed)/total
@@ -50,7 +50,8 @@ with col2:
         for i in range(len(data)):
             random_songs.append(data.iloc[i,3])
         playlist = pd.DataFrame(random.sample(random_songs,20))
-        st.dataframe(playlist)
+        playlist = playlist.rename(columns = {0:"Song Title"})
+        st.dataframe(playlist, hide_index=True)
 
 
 
