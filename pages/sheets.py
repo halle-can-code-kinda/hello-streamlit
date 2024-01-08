@@ -14,15 +14,15 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 
 with col1:
-    values = range(0,9)
+    values = range(-4,4)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
-    year = st.select_slider("recent", values,label_visibility="collapsed",value = 4, format_func=(lambda x:year_labels[x]))
+    year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
-    speed = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:speed_labels[x]))
+    speed = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:speed_labels[x]))
     mode_labels = ['happy',' ',' ',' ','indifferent',' ',' ',' ','sad']
-    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x]))
+    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:mode_labels[x]))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
-    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x]))
+    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:popularity_labels[x]))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
     with b1:
