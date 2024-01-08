@@ -14,7 +14,7 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 
 with col1:
-    values = range(-4,4)
+    values = range(-4,5)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
     year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
@@ -22,7 +22,7 @@ with col1:
     mode_labels = ['happy',' ',' ',' ','indifferent',' ',' ',' ','sad']
     mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:mode_labels[x]))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
-    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:popularity_labels[x]))
+    popularity = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:popularity_labels[x]))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
     st.write(values)
@@ -30,7 +30,11 @@ with col1:
         button = st.button("Create Playlist")
     with b2:
         lucky = st.button("I'm feeling lucky")
-
+def weights():
+    total = abs(year)+abs(speed)+abs(mode)+abs(popularity)
+    year_weight = year/total
+    speed_weight = speed/total
+    
 with col2:
     if button:
         if "Live Performances" in exclude:
