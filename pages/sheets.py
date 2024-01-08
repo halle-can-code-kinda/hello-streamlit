@@ -49,7 +49,6 @@ with col2:
         random_songs = []
         for i in range(len(data)):
             random_songs.append(data.iloc[i,3])
-        st.write(random_songs)
         playlist = pd.DataFrame(random.sample(random_songs,20))
         st.dataframe(playlist)
 
