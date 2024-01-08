@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
+import random
 
 st.header("Taylor Swift Playlist")
 st.write(" ")
@@ -14,7 +15,7 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 
 with col1:
-    values = range(-4,4)
+    values = range(-4,5)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
     year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
@@ -30,15 +31,22 @@ with col1:
         button = st.button("Create Playlist")
     with b2:
         lucky = st.button("I'm feeling lucky")
-def weights():
+
+def get_playlist():
     total = abs(year)+abs(speed)+abs(mode)+abs(popularity)
-    year_weight = year/total
-    speed_weight = speed/total
+    year_weight = abs(year)/total
+    speed_weight = abs(speed)/total
+    mode_weight = abs(mode)/total
+    popularity_weight = abs(popularity)/total   
 
 with col2:
     if button:
         if "Live Performances" in exclude:
             songs = songs.query('live==0')
         st.dataframe(songs)
+    
+    if lucky:
+        st.write(random.choice(data))
+
 
 
