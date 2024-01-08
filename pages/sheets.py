@@ -14,7 +14,7 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 
 with col1:
-    values = range(-4,5)
+    values = range(-4,4)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
     year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
@@ -34,7 +34,7 @@ def weights():
     total = abs(year)+abs(speed)+abs(mode)+abs(popularity)
     year_weight = year/total
     speed_weight = speed/total
-    
+
 with col2:
     if button:
         if "Live Performances" in exclude:
