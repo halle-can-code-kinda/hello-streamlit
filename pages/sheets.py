@@ -17,13 +17,13 @@ songs = pd.DataFrame(data)
 with col1:
     values = range(0,9)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
-    year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
+    year = st.select_slider("recent", values,label_visibility="collapsed",value = 4, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
-    speed = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:speed_labels[x]))
+    speed = st.select_slider(" ", values,label_visibility="collapsed",value =4, format_func=(lambda x:speed_labels[x]))
     mode_labels = ['happy',' ',' ',' ','indifferent',' ',' ',' ','sad']
-    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:mode_labels[x]))
+    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x]))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
-    popularity = st.select_slider(" ", values,label_visibility="collapsed",value = 0, format_func=(lambda x:popularity_labels[x]))
+    popularity = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x]))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
     st.write(values)
@@ -38,13 +38,14 @@ def get_playlist():
     speed_weight = abs(speed)/total
     mode_weight = abs(mode)/total
     popularity_weight = abs(popularity)/total   
+
 def lucky():
     random_songs = []
     for i in range(len(data)):
         random_songs.append(data.iloc[i,3])
-        st.write(random_songs)
-        playlist = pd.DataFrame(random.sample(random_songs,20))
-        st.dataframe(playlist)
+    st.write(random_songs)
+    playlist = pd.DataFrame(random.sample(random_songs,20))
+    st.dataframe(playlist)
         
 
 
