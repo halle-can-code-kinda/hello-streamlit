@@ -38,7 +38,14 @@ def get_playlist():
     speed_weight = abs(speed)/total
     mode_weight = abs(mode)/total
     popularity_weight = abs(popularity)/total   
+def lucky():
+    random_songs = []
+    for i in range(len(data)):
+        random_songs.append(data.iloc[i,3])
+        st.write(random_songs)
+        st.write(random.sample(random_songs,20))
 
+        
 with col2:
     if button:
         if "Live Performances" in exclude:
@@ -46,11 +53,7 @@ with col2:
         st.dataframe(songs)
     
     if lucky:
-        random_songs = []
-        for i in range(len(data)):
-            random_songs.append(data.iloc[i,3])
-        st.write(random_songs)
-        st.write(random.sample(random_songs,20))
+        lucky()
 
 
 
