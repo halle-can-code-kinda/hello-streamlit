@@ -15,7 +15,7 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 
 with col1:
-    values = range(-4,5)
+    values = range(-4,4)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
     year = st.select_slider("recent", values,label_visibility="collapsed",value = 0, format_func=(lambda x:year_labels[x]))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
@@ -49,6 +49,7 @@ with col2:
         random_songs = []
         for i in range(len(data)):
             random_songs.append(data.iloc[i,0])
+        st.write(random_songs)
         st.write(random.choice(random_songs))
 
 
