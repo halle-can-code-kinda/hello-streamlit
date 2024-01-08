@@ -48,7 +48,7 @@ with col2:
     if lucky:
         random_songs = []
         for i in range(len(data)):
-            random_songs.append(data.iloc[i])
+            random_songs.append(data.iloc[i,0])
         st.write(random.choice(random_songs))
 
 
