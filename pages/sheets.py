@@ -46,7 +46,10 @@ with col2:
         st.dataframe(songs)
     
     if lucky:
-        st.write(random.choice(data))
+        random_songs = []
+        for i in range(len(data)):
+            random_songs.append(data.iloc[i])
+        st.write(random.choice(random_songs))
 
 
 
