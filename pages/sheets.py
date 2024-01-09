@@ -13,17 +13,18 @@ for i in range(26):
     cols.append(i)
 data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
+slider = []
 
 with col1:
     values = range(0,9)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
-    year = st.select_slider("recent", values,label_visibility="collapsed",value = 4, format_func=(lambda x:year_labels[x]))
+    slider.append(st.select_slider("recent", values,label_visibility="collapsed",value = 4, format_func=(lambda x:year_labels[x])))
     speed_labels = ['slow',' ',' ',' ','indifferent',' ',' ',' ','fast']
-    speed = st.select_slider(" ", values,label_visibility="collapsed",value =4, format_func=(lambda x:speed_labels[x]))
+    slider.append(st.select_slider(" ", values,label_visibility="collapsed",value =4, format_func=(lambda x:speed_labels[x])))
     mode_labels = ['happy',' ',' ',' ','indifferent',' ',' ',' ','sad']
-    mode = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x]))
+    slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x])))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
-    popularity = st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x]))
+    slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x])))
     exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
     b1,b2 = st.columns(2)
     with b1:
@@ -33,17 +34,14 @@ with col1:
 
 def get_playlist():
     
-    total = abs(year)+abs(speed)+abs(mode)+abs(popularity)
-    year_weight = abs(year)/total
-    speed_weight = abs(speed)/total
-    mode_weight = abs(mode)/total
-    popularity_weight = abs(popularity)/total   
-
+    for i in range(len(slider)):
+        total = total + slider[i]
 with col2:
     if button:
         if "Live Performances" in exclude:
             songs = songs.query('live==0')
         st.dataframe(songs)
+        
     
     if lucky:
         random_songs = []
