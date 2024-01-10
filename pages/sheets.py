@@ -25,7 +25,7 @@ with col1:
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x])))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x])))
-    exclude = st.multiselect("Exclude: ", options=["Remixes","Live Peroformances", "Collaborations"])
+    exclude = st.multiselect("Exclude: ", options=["Remixes","Live Performances", "Collaborations"])
     b1,b2 = st.columns(2)
     with b1:
         button = st.button("Create Playlist")
@@ -43,10 +43,15 @@ def score(total_scores, individual_scores):
     st.write(total_scores)
     st.write(individual_scores)
 
-def luck():
+def filter_songs(songs):
+    if "Live Performances" in exclude:
+        songs = songs.query('live==0')
+    return songs
+
+def luck(songs):
     random_songs = []
-    for i in range(len(data)):
-        random_songs.append(data.iloc[i,3])
+    for i in range(len(songs)):
+        random_songs.append(songs.iloc[i,3])
     random_songs = pd.DataFrame(random.sample(random_songs,20))
     random_songs = random_songs.rename(columns = {0:"Song Title"})
     return random_songs
@@ -54,14 +59,15 @@ def luck():
 with col2:    
     if button:
         total, slider = get_totals()
+        filtered_list = filter_songs(data)
         if total == 0:
-            random_songs = luck()
+            random_songs = luck(filtered_list)
             st.dataframe(random_songs, hide_index=True)
         else:
             score(total, slider) 
 
 
     if lucky:
-        random_songs = luck()
+        random_songs = luck(data)
         st.dataframe(random_songs, hide_index=True)    
 
