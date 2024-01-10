@@ -39,9 +39,21 @@ def get_totals():
         total = total +abs(slider[i])
     return total, slider
 
-def score(total_scores, individual_scores):
+def score(total_scores, individual_scores,data):
+    weight = []
+    for i in range(len(individual_scores)):
+        weight.append(abs(individual_scores[i])/total_scores)
+    st.write(len(data))
+    weighted_songs = []
+    for i in range(len(data)):
+        #score old vs new slider
+        if slider[0] < 0:
+            st.write(data['tempo'].max())
+
+
     st.write(total_scores)
     st.write(individual_scores)
+    st.write(weight)
 
 def filter_songs(songs):
     if "Live Performances" in exclude:
@@ -64,7 +76,7 @@ with col2:
             random_songs = luck(filtered_list)
             st.dataframe(random_songs, hide_index=True)
         else:
-            score(total, slider) 
+            score(total, slider,filtered_list) 
 
 
     if lucky:
