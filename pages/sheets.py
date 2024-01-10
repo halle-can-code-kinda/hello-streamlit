@@ -32,24 +32,32 @@ with col1:
     with b2:
         lucky = st.button("I'm feeling lucky")
 
-def get_playlist():
-    
+def get_totals():    
+    total = 0
     for i in range(len(slider)):
-        total = total + slider[i]
-with col2:
+        slider[i]=slider[i]-4
+        total = total +abs(slider[i])
+    return total 
+
+def luck():
+    random_songs = []
+    for i in range(len(data)):
+        random_songs.append(data.iloc[i,3])
+    random_songs = pd.DataFrame(random.sample(random_songs,20))
+    random_songs = random_songs.rename(columns = {0:"Song Title"})
+    return random_songs
+
+with col2:    
     if button:
-        if "Live Performances" in exclude:
-            songs = songs.query('live==0')
-        st.dataframe(songs)
-        
-    
+        total = get_totals()
+        if total == 0:
+            random_songs = luck()
+            st.dataframe(random_songs, hide_index=True)
+        else:
+            st.write(total)    
+
+
     if lucky:
-        random_songs = []
-        for i in range(len(data)):
-            random_songs.append(data.iloc[i,3])
-        playlist = pd.DataFrame(random.sample(random_songs,20))
-        playlist = playlist.rename(columns = {0:"Song Title"})
-        st.dataframe(playlist, hide_index=True)
-
-
+        random_songs = luck()
+        st.dataframe(random_songs, hide_index=True)    
 
