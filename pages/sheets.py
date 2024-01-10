@@ -37,7 +37,11 @@ def get_totals():
     for i in range(len(slider)):
         slider[i]=slider[i]-4
         total = total +abs(slider[i])
-    return total 
+    return total, slider
+
+def score(total_scores, individual_scores):
+    st.write(total_scores)
+    st.write(individual_scores)
 
 def luck():
     random_songs = []
@@ -49,12 +53,12 @@ def luck():
 
 with col2:    
     if button:
-        total = get_totals()
+        total, slider = get_totals()
         if total == 0:
             random_songs = luck()
             st.dataframe(random_songs, hide_index=True)
         else:
-            st.write(total)    
+            score(total, slider) 
 
 
     if lucky:
