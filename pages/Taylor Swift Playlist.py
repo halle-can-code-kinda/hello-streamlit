@@ -66,10 +66,10 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['popularity'].min()-data['popularity'].max())*data.iloc[i,23]-1/(data['popularity'].min()-data['popularity'].max())*data['popularity'].max())*weight[3]
         elif slider[3] > 0:
             score = score + (1/(data['popularity'].max()-data['popularity'].min())*data.iloc[i,23]-1/(data['popularity'].max()-data['popularity'].min())*data['popularity'].min())*weight[3]
-        weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,20]])
+        weighted_songs.append([data.iloc[i,3],data.iloc[i,0])
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
-    st.dataframe(weighted_songs)
+    #st.dataframe(weighted_songs)
     song_list = []
     for i in range(len(weighted_songs)):
         song_list.append(weighted_songs.iloc[i,0])
