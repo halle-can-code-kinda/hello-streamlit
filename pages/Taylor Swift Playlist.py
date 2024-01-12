@@ -76,7 +76,7 @@ def score(total_scores, individual_scores,data):
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
     #st.dataframe(weighted_songs)
     song_list = []
-    for i in range(len(30)):
+    for i in range(30):
         song_list.append(weighted_songs.iloc[i,0])
     song_list = pd.DataFrame(random.sample(song_list,20))
     song_list = song_list.rename(columns={0:"Song Title"})
