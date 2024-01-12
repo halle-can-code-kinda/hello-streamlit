@@ -27,9 +27,9 @@ with col1:
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x])))
     t1,t2 = st.columns(2)
     with t1:
-        t_remixes = st.toggle("Include Remixes")
+        t_remixes = st.toggle("Include Remixes",True)
     with t2: 
-        t_live = st.toggle("Include Live Performances")
+        t_live = st.toggle("Include Live Performances",True)
     b1,b2 = st.columns(2)
     with b1:
         button = st.button("Create Playlist")
@@ -70,8 +70,9 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['popularity'].min()-data['popularity'].max())*data.iloc[i,23]-1/(data['popularity'].min()-data['popularity'].max())*data['popularity'].max())*weight[3]
         elif slider[3] > 0:
             score = score + (1/(data['popularity'].max()-data['popularity'].min())*data.iloc[i,23]-1/(data['popularity'].max()-data['popularity'].min())*data['popularity'].min())*weight[3]
-        weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score])
+        weighted_songs.append([data.iloc[i,3],data.iloc[i,0],data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23],score])
     weighted_songs = pd.DataFrame(weighted_songs)
+    st.dataframe(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
     #st.dataframe(weighted_songs)
     song_list = []
