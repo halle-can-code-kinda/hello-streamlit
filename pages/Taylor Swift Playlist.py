@@ -9,7 +9,7 @@ col1, col2 = st.columns(2)
 url = "https://docs.google.com/spreadsheets/d/1poo8680VUsK15L5N_vh4N1xW4ygzHY3hlh3R2CoNv3g/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 cols = []
-for i in range(26):
+for i in range(27):
     cols.append(i)
 data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
@@ -55,7 +55,7 @@ def score(total_scores, individual_scores,data):
         if slider[0] < 0:
             score = score + (1/(data['total_tracks'].min()-data['total_tracks'].max())*data.iloc[i,6]-1/(data['total_tracks'].min()-data['total_tracks'].max())*data['total_tracks'].max())*weight[0]
         elif slider[0] > 0:
-            score = score + (1/(data['release_year'].max()-data['release_year'].min())*data.iloc[i,8]-1/(data['release_year'].max()-data['release_year'].min())*data['release_year'].min())*weight[0]
+            score = score + (1/(data['total_tracks'].max()-data['total_tracks'].min())*data.iloc[i,6]-1/(data['total_tracks'].max()-data['total_tracks'].min())*data['total_tracks'].min())*weight[0]
         #score tempo
         if slider[1] < 0:
             score = score + (1/(data['tempo'].min()-data['tempo'].max())*data.iloc[i,20]-1/(data['tempo'].min()-data['tempo'].max())*data['tempo'].max())*weight[1]
@@ -74,7 +74,7 @@ def score(total_scores, individual_scores,data):
         weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
-    #st.dataframe(weighted_songs)
+    st.dataframe(weighted_songs)
     song_list = []
     for i in range(30):
         song_list.append(weighted_songs.iloc[i,0])
