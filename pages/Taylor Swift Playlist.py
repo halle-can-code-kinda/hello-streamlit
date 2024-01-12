@@ -53,9 +53,9 @@ def score(total_scores, individual_scores,data):
         #score old vs new slider
          #score tempo
         if slider[0] < 0:
-            score = score + (1/(data['total_tracks'].min()-data['total_tracks'].max())*data.iloc[i,6]-1/(data['total_tracks'].min()-data['total_tracks'].max())*data['total_tracks'].max())*weight[0]
+            score = score + (1/(data['release_year'].min()-data['release_year'].max())*data.iloc[i,8]-1/(data['release_year'].min()-data['release_year'].max())*data['release_year'].max())*weight[0]
         elif slider[0] > 0:
-            score = score + (1/(data['release_year'].max()-data['total_tracks'].min())*data.iloc[i,6]-1/(data['total_tracks'].max()-data['total_tracks'].min())*data['total_tracks'].min())*weight[0]
+            score = score + (1/(data['release_year'].max()-data['release_year'].min())*data.iloc[i,8]-1/(data['release_year'].max()-data['release_year'].min())*data['release_year'].min())*weight[0]
         #score tempo
         if slider[1] < 0:
             score = score + (1/(data['tempo'].min()-data['tempo'].max())*data.iloc[i,20]-1/(data['tempo'].min()-data['tempo'].max())*data['tempo'].max())*weight[1]
