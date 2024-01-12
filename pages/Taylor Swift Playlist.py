@@ -9,7 +9,7 @@ col1, col2 = st.columns(2)
 url = "https://docs.google.com/spreadsheets/d/1poo8680VUsK15L5N_vh4N1xW4ygzHY3hlh3R2CoNv3g/edit?usp=sharing"
 conn = st.connection("gsheets", type=GSheetsConnection)
 cols = []
-for i in range(25):
+for i in range(26):
     cols.append(i)
 data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
@@ -25,7 +25,11 @@ with col1:
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x])))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x])))
-    exclude = st.multiselect("Exclude: ", options=["Remixes","Live Performances", "Collaborations"])
+    t1,t2 = st.columns(2)
+    with t1:
+        t_remixes = st.toggle("Include Remixes")
+    with t2: 
+        t_live = st.toggle("Include Live Performances")
     b1,b2 = st.columns(2)
     with b1:
         button = st.button("Create Playlist")
@@ -78,8 +82,10 @@ def score(total_scores, individual_scores,data):
     return song_list
 
 def filter_songs(songs):
-    if "Live Performances" in exclude:
+    if t_live == False:
         songs = songs.query('live==0')
+    if t_remixes == False:
+        songs = songs.query('remix==0')
     return songs
 
 def luck(songs):
