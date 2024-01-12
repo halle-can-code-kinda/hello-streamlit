@@ -52,9 +52,9 @@ def score(total_scores, individual_scores,data):
         score = 0
         #score old vs new slider
         if slider[0] < 0:
-            score = score + (1/(data['release_year'].min()-data['release_year'].max())*data.iloc[i,8]-1/(data['release_year'].min()-data['release_year'].max())*data['release_year'].max())*weight[0]    
+            score = score + (1/(data[8].min()-data[8].max())*data.iloc[i,8]-1/(data[8].min()-data[8].max())*data[8].max())*weight[0]    
         elif slider[0] > 0:
-            score = score + (1/(data['release_year'].max()-data['release_year'].min())*data.iloc[i,8]-1/(data['release_year'].max()-data['release_year'].min())*data['release_year'].min())*weight[0]
+            score = score + (1/(data[8].max()-data[8].min())*data.iloc[i,8]-1/(data[8].max()-data[8].min())*data[8].min())*weight[0]
         #score tempo
         if slider[1] < 0:
             score = score + (1/(data['tempo'].min()-data['tempo'].max())*data.iloc[i,20]-1/(data['tempo'].min()-data['tempo'].max())*data['tempo'].max())*weight[1]
