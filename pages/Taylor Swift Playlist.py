@@ -72,7 +72,6 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['popularity'].max()-data['popularity'].min())*data.iloc[i,23]-1/(data['popularity'].max()-data['popularity'].min())*data['popularity'].min())*weight[3]
         weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
     weighted_songs = pd.DataFrame(weighted_songs)
-    st.dataframe(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
     #st.dataframe(weighted_songs)
     song_list = []
