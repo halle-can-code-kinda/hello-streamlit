@@ -112,9 +112,11 @@ with col2:
         if total == 0:
             random_songs = luck(filtered_list)
             st.dataframe(random_songs, hide_index=True)
+            send_to_spotify = st.button("Create Spotify Playlist") 
         else:
             playlist = score(total, slider,filtered_list)
             st.dataframe(playlist,hide_index=True)
+            send_to_spotify = st.button("Create Spotify Playlist") 
 
 
     if lucky:
