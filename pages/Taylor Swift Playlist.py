@@ -121,5 +121,6 @@ with col2:
         if lucky:
             st.session_state["button2"] = not st.session_state["button2"]
             random_songs = luck(data)
-            st.dataframe(random_songs, hide_index=True)    
+            st.dataframe(random_songs, hide_index=True)
+            send_to_spotify = st.button("Create Spotify Playlist")    
 
