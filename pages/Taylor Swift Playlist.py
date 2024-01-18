@@ -16,6 +16,12 @@ data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 slider = []
 
+if "button1" not in st.session_state:
+    st.session_state["button1"] = False
+
+if "button2" not in st.session_state:
+    st.session_state["button2"] = False
+
 with col1:
     values = range(0,9)
     year_labels = ['old',' ',' ',' ','indifferent',' ',' ',' ','new']
@@ -100,6 +106,7 @@ def luck(songs):
 
 with col2:    
     if button:
+        st.session_state["button1"] = not st.session_state["button1"]
         total, slider = get_totals()
         filtered_list = filter_songs(data)
         if total == 0:
@@ -110,7 +117,9 @@ with col2:
             st.dataframe(playlist,hide_index=True)
 
 
-    if lucky:
-        random_songs = luck(data)
-        st.dataframe(random_songs, hide_index=True)    
+    if st.session_state["button1"]:
+        if lucky:
+            st.session_state["button2"] = not st.session_state["button2"]
+            random_songs = luck(data)
+            st.dataframe(random_songs, hide_index=True)    
 
