@@ -4,7 +4,7 @@ import pandas as pd
 import random
 
 
-st.header("Taylor Swift Playlist")
+st.title("Taylor Swift Playlist")
 st.write(" ")
 col1, col2 = st.columns(2)
 url = "https://docs.google.com/spreadsheets/d/1poo8680VUsK15L5N_vh4N1xW4ygzHY3hlh3R2CoNv3g/edit?usp=sharing"
@@ -105,9 +105,8 @@ def luck(songs):
     return random_songs
 
 def spotify_inputs():
-    user_id = st.text_input
     send_to_spotify = st.button("Create Spotify Playlist")
-
+    
 with col2:    
     if button:
         st.session_state["button1"] = not st.session_state["button1"]
