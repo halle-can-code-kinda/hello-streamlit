@@ -104,6 +104,10 @@ def luck(songs):
     random_songs = random_songs.rename(columns = {0:"Song Title"})
     return random_songs
 
+def spotify_inputs():
+    user_id = st.text_input
+    send_to_spotify = st.button("Create Spotify Playlist")
+
 with col2:    
     if button:
         st.session_state["button1"] = not st.session_state["button1"]
@@ -112,16 +116,14 @@ with col2:
         if total == 0:
             random_songs = luck(filtered_list)
             st.dataframe(random_songs, hide_index=True)
-            send_to_spotify = st.button("Create Spotify Playlist") 
+            spotify_inputs()
         else:
             playlist = score(total, slider,filtered_list)
             st.dataframe(playlist,hide_index=True)
-            send_to_spotify = st.button("Create Spotify Playlist") 
-
+            spotify_inputs()
 
     if lucky:
         st.session_state["button1"] = not st.session_state["button1"]
         random_songs = luck(data)
         st.dataframe(random_songs, hide_index=True)
-        send_to_spotify = st.button("Create Spotify Playlist")    
-
+        spotify_inputs()
