@@ -3,6 +3,7 @@ from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import random
 
+
 st.header("Taylor Swift Playlist")
 st.write(" ")
 col1, col2 = st.columns(2)
