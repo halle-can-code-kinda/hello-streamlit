@@ -6,29 +6,6 @@ spotify_user_id = 'fa7bf51d5c0242058e1737db56270f6f'
 import streamlit as st
 
 
-def get_spotify_uri(track, artist):
-	"""Search For the Song"""
-
-	query = "https://api.spotify.com/v1/search?\
-	query=track%3A{}+artist%3A{}&type=track".format(
-		track,
-		artist
-	)
-	response = requests.get(
-		query,
-		headers={
-			"Content-Type": "application/json",
-			"Authorization": "Bearer {}".format(spotify_token)
-		}
-	)
-	response = response.json()
-	songs = response["tracks"]["items"]
-
-	url = songs[0]["uri"]
-
-	return url
-
-
 def create_playlist():
 	"""Create A New Playlist"""
 	request_body = json.dumps(
