@@ -2,7 +2,7 @@
 import requests
 import json
 spotify_token = 'fa7bf51d5c0242058e1737db56270f6f'
-spotify_user_id = 'fa7bf51d5c0242058e1737db56270f6f'
+spotify_user_id = 'd84a30e86c93422699bb9be941893e25'
 import streamlit as st
 
 
@@ -15,7 +15,6 @@ def create_playlist():
 			"public": False,
 		}
 	)
-
 	query = "https://api.spotify.com/v1/users/{}/playlists".format(
 		spotify_user_id)
 	response = requests.post(
@@ -27,7 +26,7 @@ def create_playlist():
 		},
 	)
 	response = response.json()
-	return response["id"]
+	#return response["id"]
 
 
 def add_song(playlist_id, urls):
