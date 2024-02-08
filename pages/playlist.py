@@ -28,7 +28,7 @@ def create_playlist():
 	)
 	response = response.json()
 	#st.write(response["id"])
-	return response["id"]
+	#return response["id"]
 
 
 def add_song(playlist_id, urls):
