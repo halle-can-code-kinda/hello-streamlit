@@ -107,64 +107,6 @@ def luck(songs):
 def spotify_inputs():
     send_to_spotify = st.button("Create Spotify Playlist")
 
-def create_playlist():
-    """Create A New Playlist"""
-    request_body = json.dumps(
-        {
-            "name": "My New Geeks Playlist",
-            "description": "Songs",
-            "public": True,
-        }
-    )
- 
-    query = "https://api.spotify.com/v1/users/{}/playlists".format(
-        spotify_user_id)
-    response = requests.post(
-        query,
-        data=request_body,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": "Bearer {}".format(spotify_token),
-        },
-    )
-    response = response.json()
-    return response["id"]
- 
- 
-def add_song(playlist_id, urls):
-    """Add all liked songs into a new Spotify playlist"""
- 
-    request_data = json.dumps(urls)
- 
-    query = "https://api.spotify.com/v1/playlists/{}/tracks".format(
-        playlist_id)
- 
-    response = requests.post(
-        query,
-        data=request_data,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": "Bearer {}".format(spotify_token)
-        }
-    )
- 
-    return "songs added successfully"
- 
- 
-# fetching data from youtube
-response = get_play()
- 
-# creating spotify playlist
-play_id = create_playlist()
- 
-# getting track name and  artist name form yt
-song_info = extract_song_from_yt(response)
- 
-# getting url for spotify songs
- 
-urls = []
-for i in range(len(response['items'])):
-    urls.append(get_spotify_uri(song_info[i][0], song_info[i][1]))
  
 # adding song to new playlist
 with col2:    
