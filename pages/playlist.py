@@ -1,8 +1,8 @@
 
 import requests
 import json
-spotify_token = 'd84a30e86c93422699bb9be941893e25f'
-spotify_user_id = 'fa7bf51d5c0242058e1737db56270f6f5'
+spotify_user_id = 'd84a30e86c93422699bb9be941893e25f'
+spotify_token = 'fa7bf51d5c0242058e1737db56270f6f5'
 import streamlit as st
 
 
