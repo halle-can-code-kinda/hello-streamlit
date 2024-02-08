@@ -26,7 +26,7 @@ def create_playlist():
 		},
 	)
 	response = response.json()
-	st.write(response["id"])
+	#st.write(response["id"])
 	return response["id"]
 
 
