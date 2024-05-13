@@ -32,6 +32,8 @@ with col1:
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:mode_labels[x])))
     popularity_labels = ['less known',' ',' ',' ','indifferent',' ',' ',' ','hit']
     slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:popularity_labels[x])))
+    acoustic_labels = ['less acoustic',' ',' ',' ','indifferent',' ',' ',' ','more acoustic']
+    slider.append(st.select_slider(" ", values,label_visibility="collapsed",value = 4, format_func=(lambda x:acoustic_labels[x])))
     t1,t2 = st.columns(2)
     with t1:
         t_remixes = st.toggle("Include Remixes",True)
@@ -78,6 +80,10 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['popularity'].min()-data['popularity'].max())*data.iloc[i,23]-1/(data['popularity'].min()-data['popularity'].max())*data['popularity'].max())*weight[3]
         elif slider[3] > 0:
             score = score + (1/(data['popularity'].max()-data['popularity'].min())*data.iloc[i,23]-1/(data['popularity'].max()-data['popularity'].min())*data['popularity'].min())*weight[3]
+        if slider[4] < 0:
+            score = score + (1/(data['acousticness'].min()-data['acousticness'].max())*data.iloc[i,11]-1/(data['acousticness'].min()-data['acousticness'].max())*data['acousticness'].max())*weight[4]
+        elif slider[3] > 0:
+            score = score + (1/(data['acousticness'].max()-data['acousticness'].min())*data.iloc[i,11]-1/(data['acousticness'].max()-data['acousticness'].min())*data['acousticness'].min())*weight[4]
         weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
