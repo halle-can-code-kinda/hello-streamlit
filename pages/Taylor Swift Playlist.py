@@ -121,16 +121,16 @@ with col2:
         total, slider = get_totals()
         filtered_list = filter_songs(data)
         if total == 0:
-            random_songs = luck(filtered_list)
-            st.dataframe(random_songs, hide_index=True)
-            spotify_inputs()
+            playlist = luck(filtered_list)
+            st.dataframe(playlist, hide_index=True)
+
         else:
             playlist = score(total, slider,filtered_list)
             st.dataframe(playlist,hide_index=True)
-            spotify_inputs()
+
 
     if lucky:
         st.session_state["button1"] = not st.session_state["button1"]
-        random_songs = luck(data)
-        st.dataframe(random_songs, hide_index=True)
-        spotify_inputs()
+        playlist = luck(data)
+        st.dataframe(playlist, hide_index=True)
+
