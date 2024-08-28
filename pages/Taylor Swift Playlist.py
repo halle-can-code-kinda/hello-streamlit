@@ -110,8 +110,6 @@ def luck(songs):
     random_songs = random_songs.rename(columns = {0:"Song Title"})
     return random_songs
 
-def spotify_inputs():
-    send_to_spotify = st.button("Create Spotify Playlist")
 
  
 # adding song to new playlist
