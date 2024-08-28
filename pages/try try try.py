@@ -89,7 +89,7 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['acousticness'].min()-data['acousticness'].max())*data.iloc[i,11]-1/(data['acousticness'].min()-data['acousticness'].max())*data['acousticness'].max())*weight[4]
         elif slider[4] > 0:
             score = score + (1/(data['acousticness'].max()-data['acousticness'].min())*data.iloc[i,11]-1/(data['acousticness'].max()-data['acousticness'].min())*data['acousticness'].min())*weight[4]
-        weighted_songs.append([data.iloc[i,3],data.iloc[i,4]])
+        weighted_songs.append([data.iloc[i,3],data.iloc[i,4], score])
         #weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
