@@ -139,7 +139,7 @@ with col2:
         playlist.to_csv('data/songs.csv', index = False)
     
     if st.session_state['playlist'] == True:
-        cool = pd.read_csv('/workspaces/hello-streamlit/data/songs.csv')
+        cool = pd.read_csv('data/songs.csv')
         st.dataframe(cool["Song Title"], hide_index = True, width = 1000)
         title = st.text_input("playlist title")
         if st.button('send to spotify'):
