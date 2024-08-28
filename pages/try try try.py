@@ -132,11 +132,11 @@ with col2:
             
         else:
             playlist = score(total, slider,filtered_list)
-        playlist.to_csv('/workspaces/hello-streamlit/data/songs.csv', index = False)
+        playlist.to_csv('data/songs.csv', index = False)
             
     elif lucky:
         playlist = luck(data)
-        playlist.to_csv('/workspaces/hello-streamlit/data/songs.csv', index = False)
+        playlist.to_csv('data/songs.csv', index = False)
     
     if st.session_state['playlist'] == True:
         cool = pd.read_csv('/workspaces/hello-streamlit/data/songs.csv')
