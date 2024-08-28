@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import random
-import create_playlist as cp
+import os
 
 #page setup
 st.title("Taylor Swift Playlist")
@@ -16,15 +16,16 @@ for i in range(26):
 data = conn.read(spreadsheet=url, usecols=cols)
 songs = pd.DataFrame(data)
 slider = []
+ids = []
 
-st.session_state['Playlist'] = False
-st.session_state['Spotify'] = False
+if 'playlist' not in st.session_state:
+    st.session_state['playlist'] = False
 
-if "button1" not in st.session_state:
-    st.session_state["button1"] = False
 
-if "button2" not in st.session_state:
-    st.session_state["button2"] = False
+st.session_state['lucky'] = False
+st.session_state['spotify'] = False
+
+
 
 with col1:
     values = range(0,9)
@@ -88,15 +89,16 @@ def score(total_scores, individual_scores,data):
             score = score + (1/(data['acousticness'].min()-data['acousticness'].max())*data.iloc[i,11]-1/(data['acousticness'].min()-data['acousticness'].max())*data['acousticness'].max())*weight[4]
         elif slider[4] > 0:
             score = score + (1/(data['acousticness'].max()-data['acousticness'].min())*data.iloc[i,11]-1/(data['acousticness'].max()-data['acousticness'].min())*data['acousticness'].min())*weight[4]
-        weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
+        weighted_songs.append([data.iloc[i,3],data.iloc[i,4]])
+        #weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
     #st.dataframe(weighted_songs)
     song_list = []
     for i in range(30):
-        song_list.append(weighted_songs.iloc[i,0])
+        song_list.append([weighted_songs.iloc[i,0], weighted_songs.iloc[i,1]])
     song_list = pd.DataFrame(random.sample(song_list,20))
-    song_list = song_list.rename(columns={0:"Song Title"})
+    song_list = song_list.rename(columns={0:"Song Title", 1: "ID"})
     return song_list
 
 def filter_songs(songs):
@@ -109,35 +111,45 @@ def filter_songs(songs):
 def luck(songs):
     random_songs = []
     for i in range(len(songs)):
-        random_songs.append(songs.iloc[i,3])
+        random_songs.append([songs.iloc[i,3], songs.iloc[i,4]])
     random_songs = pd.DataFrame(random.sample(random_songs,20))
-    random_songs = random_songs.rename(columns = {0:"Song Title"})
+    random_songs = random_songs.rename(columns = {0:"Song Title", 1: "ID"})
     return random_songs
 
 
 if button or lucky:
-    st.session_state['Playlist'] = True
+    st.session_state['playlist'] = True
 
-# adding song to new playlist
+
+# adding songs to new playlist
 with col2:  
-    if st.session_state['Playlist'] == True:  
-        if button:
-            total, slider = get_totals()
-            filtered_list = filter_songs(data)
-            if total == 0:
-                playlist = luck(filtered_list)
-                st.dataframe(playlist, hide_index=True)
-
-            else:
-                playlist = score(total, slider,filtered_list)
-                st.dataframe(playlist,hide_index=True)
-
-        if lucky:
-            playlist = luck(data)
-            st.dataframe(playlist, hide_index=True)
-
+    if button: 
+        total, slider = get_totals()
+        filtered_list = filter_songs(data)
+        if total == 0:
+            playlist = luck(filtered_list)
+            
+            
+        else:
+            playlist = score(total, slider,filtered_list)
+        playlist.to_csv('/workspaces/hello-streamlit/data/songs.csv', index = False)
+            
+    elif lucky:
+        playlist = luck(data)
+        playlist.to_csv('/workspaces/hello-streamlit/data/songs.csv', index = False)
+    
+    if st.session_state['playlist'] == True:
+        cool = pd.read_csv('/workspaces/hello-streamlit/data/songs.csv')
+        st.dataframe(cool["Song Title"], hide_index = True, width = 1000)
         title = st.text_input("playlist title")
         if st.button('send to spotify'):
-            st.session_state['Spotify'] = True
-            st.session_state['Playlist'] = True
+            st.session_state['spotify'] = True
+
+
+
+
+    # if st.session_state['playlist'] == True and st.session_state['spotify'] == True:
+    #     cool = pd.read_csv('/workspaces/hello-streamlit/data/songs.csv')
+    #     st.dataframe(cool, hide_index = True)
+
     
