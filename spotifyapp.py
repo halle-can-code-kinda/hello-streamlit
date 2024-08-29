@@ -5,8 +5,8 @@ def authenticate_spotify(self):
         auth_manager=SpotifyOAuth(
             scope="playlist-modify-private",
             redirect_uri="http://example.com",
-            client_id=os.getenv("SPOTIFY_CLIENT_ID"),
-            client_secret=os.getenv("SPOTIFY_CLIENT_SECRET"),
+            client_id=os.getenv("7e311aa466b947909b3a708d4868e76d"),
+            client_secret=os.getenv("4a7d7442354d499c821defa59cc1886c"),
             show_dialog=True,
             cache_path="token.txt"
         )
