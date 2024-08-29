@@ -6,5 +6,6 @@ streamlit
 #added
 chess
 matplotlib
+spotipy
 stockfish
 st-gsheets-connection

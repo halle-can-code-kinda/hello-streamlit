@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import random
-import os
 
 #page setup
 st.title("Taylor Swift Playlist")
@@ -21,11 +20,7 @@ ids = []
 if 'playlist' not in st.session_state:
     st.session_state['playlist'] = False
 
-
-st.session_state['lucky'] = False
 st.session_state['spotify'] = False
-
-
 
 with col1:
     values = range(0,9)
@@ -90,10 +85,10 @@ def score(total_scores, individual_scores,data):
         elif slider[4] > 0:
             score = score + (1/(data['acousticness'].max()-data['acousticness'].min())*data.iloc[i,11]-1/(data['acousticness'].max()-data['acousticness'].min())*data['acousticness'].min())*weight[4]
         weighted_songs.append([data.iloc[i,3],data.iloc[i,4], score])
-        #weighted_songs.append([data.iloc[i,3],data.iloc[i,0],score,data.iloc[i,8],data.iloc[i,20],data.iloc[i,22],data.iloc[i,23]])
+        
     weighted_songs = pd.DataFrame(weighted_songs)
     weighted_songs = weighted_songs.sort_values(2,ascending=False)
-    #st.dataframe(weighted_songs)
+
     song_list = []
     for i in range(30):
         song_list.append([weighted_songs.iloc[i,0], weighted_songs.iloc[i,1]])
@@ -116,10 +111,8 @@ def luck(songs):
     random_songs = random_songs.rename(columns = {0:"Song Title", 1: "ID"})
     return random_songs
 
-
 if button or lucky:
     st.session_state['playlist'] = True
-
 
 # adding songs to new playlist
 with col2:  
@@ -128,7 +121,6 @@ with col2:
         filtered_list = filter_songs(data)
         if total == 0:
             playlist = luck(filtered_list)
-            
             
         else:
             playlist = score(total, slider,filtered_list)
@@ -144,12 +136,3 @@ with col2:
         title = st.text_input("playlist title")
         if st.button('send to spotify'):
             st.session_state['spotify'] = True
-
-
-
-
-    # if st.session_state['playlist'] == True and st.session_state['spotify'] == True:
-    #     cool = pd.read_csv('/workspaces/hello-streamlit/data/songs.csv')
-    #     st.dataframe(cool, hide_index = True)
-
-    
